@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Pizza",
+      "description": "Best pizza",
+      "price": "55"
+    },
+    {
+      "id": 2,
+      "name": "Cheeseburger",
+      "description": "Best burger",
+      "price": "70"
+    },
+    {
+      "id": 3,
+      "name": "Steak",
+      "description": "Best steak",
+      "price": "90"
+    },
+    {
+      "id": 4,
+      "name": "Scrambled Egg",
+      "description": "Best egg",
+      "price": "50"
+    }
+  ]
+}
