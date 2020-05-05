@@ -7,18 +7,18 @@ describe("User can see menu", () => {
       response: "fixture:menu_list_index.json",
     });
   });
-  it("shows one menu item", () => {
+  it("shows first item", () => {
     cy.visit("/");
-    cy.get("#menuitem-1").within(() => {
+    cy.get("#menu-item-1").within(() => {
       cy.contains("Pizza");
       cy.contains("Best pizza");
       cy.contains("55");
     });
   });
 
-  it("shows one menu item", () => {
+  it("shows second item", () => {
     cy.visit("/");
-    cy.get("#menuitem-2").within(() => {
+    cy.get("#menu-item-2").within(() => {
       cy.contains("Cheeseburger");
       cy.contains("Best burger");
       cy.contains("70");
