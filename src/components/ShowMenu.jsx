@@ -7,9 +7,14 @@ export class ShowMenu extends Component {
   };
 
   componentDidMount() {
-    axios.get("/menu_data").then((response) => {
+    let headers = {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    };
+    axios.get("/menu_items", { headers: headers }).then((response) => {
+      debugger;
       this.setState({
-        menuList: response.data.products,
+        menuList: response.data.items,
       });
     });
   }
