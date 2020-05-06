@@ -8,6 +8,7 @@ class App extends Component {
     renderLoginForm: false,
     authenticated: false,
     message: "",
+    sidebar: false,
   };
 
   onLogin = async (e) => {
@@ -31,19 +32,22 @@ class App extends Component {
     const { renderLoginForm, authenticated, message } = this.state;
     let renderLogin;
     switch (true) {
-      case renderLoginForm && !authenticated:
-        renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
-        break;
-      case !renderLoginForm && !authenticated:
+      case !authenticated:
         renderLogin = (
           <>
             <button
               id="login"
-              onClick={() => this.setState({ renderLoginForm: true })}
+              onClick={() =>
+                this.setState({ renderLoginForm: !this.state.renderLoginForm })
+              }
             >
               Login
             </button>
             <p id="message">{message}</p>
+            <LoginForm
+              submitFormHandler={this.onLogin}
+              sidebarP={this.state.renderLoginForm}
+            />
           </>
         );
         break;
@@ -57,10 +61,12 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <Menu />
+      <>
+        <div>
+          <Menu />
+        </div>
         {renderLogin}
-      </div>
+      </>
     );
   }
 }

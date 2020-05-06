@@ -1,17 +1,66 @@
-import React from "react";
+import React, { Component } from "react";
+import {
+  Menu,
+  Segment,
+  Sidebar,
+  Form,
+  Label,
+  Header,
+  Divider,
+} from "semantic-ui-react";
 
-const LoginForm = (props) => {
-  return (
-    <form id="login-form" onSubmit={props.submitFormHandler}>
-      <label>Email</label>
-      <input name="email" type="email" id="email"></input>
+class LoginForm extends Component {
+  state = {
+    visible: true,
+  };
+  render() {
+    return (
+      <Sidebar.Pushable as={Segment}>
+        <Sidebar
+          as={Menu}
+          animation="overlay"
+          icon="labeled"
+          inverted
+          vertical
+          direction="right"
+          visible={this.props.sidebarP}
+          width="wide"
+        >
+          <Menu.Item as="a">
+            <Header inverted>Login</Header>
+            <Form id="login-form" onSubmit={this.props.submitFormHandler}>
+              <Label inverted>Email</Label>
+              <input name="email" type="email" id="login-email"></input>
+              <Label inverted>Password</Label>
+              <input
+                name="password"
+                type="password"
+                id="login-password"
+              ></input>
+              <button id="submit">Submit</button>
+            </Form>
+          </Menu.Item>
+          <Divider horizontal inverted>
+            or
+          </Divider>
+          <Menu.Item as="a">
+            <Header inverted>Register</Header>
+            <Form id="login-form" onSubmit={this.props.submitFormHandler}>
+              <Label inverted>Email</Label>
+              <input name="email" type="email" id="email"></input>
+              <Label inverted>Password</Label>
+              <input name="password" type="password" id="password"></input>
+              <button id="submit">Submit</button>
+            </Form>
+          </Menu.Item>
+        </Sidebar>
 
-      <label>Password</label>
-      <input name="password" type="password" id="password"></input>
-
-      <button id="submit">Submit</button>
-    </form>
-  );
-};
+        <Sidebar.Pusher>
+          <div style={{ height: "90vh" }}></div>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
+    );
+  }
+}
 
 export default LoginForm;
