@@ -15,9 +15,9 @@ describe("User can log in", () => {
     });
     cy.get("#login").click();
     cy.get("#login-form").within(() => {
-      cy.get("#email").type("user@mail.com");
-      cy.get("#password").type("password");
-      cy.get("button").contains("Submit").click();
+      cy.get("#login-email").type("user@mail.com");
+      cy.get("#login-password").type("password");
+      cy.get("#login-submit").contains("Submit").click();
     });
     cy.get("#message").should("contain", "Hi user@mail.com");
   });
@@ -34,9 +34,9 @@ describe("User can log in", () => {
     });
     cy.get("#login").click();
     cy.get("#login-form").within(() => {
-      cy.get("#email").type("user@mail.com");
-      cy.get("#password").type("wrongpassword");
-      cy.get("button").contains("Submit").click();
+      cy.get("#login-email").type("user@mail.com");
+      cy.get("#login-password").type("wrongpassword");
+      cy.get("#login-submit").contains("Submit").click();
     });
     cy.get("#message").should(
       "contain",

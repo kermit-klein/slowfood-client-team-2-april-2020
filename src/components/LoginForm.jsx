@@ -37,7 +37,7 @@ class LoginForm extends Component {
                 type="password"
                 id="login-password"
               ></input>
-              <button id="submit">Submit</button>
+              <button id="login-submit">Submit</button>
             </Form>
           </Menu.Item>
           <Divider horizontal inverted>
