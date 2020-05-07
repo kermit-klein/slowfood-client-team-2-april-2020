@@ -40,19 +40,6 @@ class LoginForm extends Component {
               <button id="login-submit">Submit</button>
             </Form>
           </Menu.Item>
-          <Divider horizontal inverted>
-            or
-          </Divider>
-          <Menu.Item as="a">
-            <Header inverted>Register</Header>
-            <Form id="login-form" onSubmit={this.props.submitFormHandler}>
-              <Label inverted>Email</Label>
-              <input name="email" type="email" id="email"></input>
-              <Label inverted>Password</Label>
-              <input name="password" type="password" id="password"></input>
-              <button id="submit">Submit</button>
-            </Form>
-          </Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher>

@@ -8,7 +8,6 @@ class App extends Component {
     renderLoginForm: false,
     authenticated: false,
     message: "",
-    sidebar: false,
   };
 
   onLogin = async (e) => {
