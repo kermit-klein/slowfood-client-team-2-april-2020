@@ -4,25 +4,29 @@
       "id": 1,
       "name": "Pizza",
       "description": "Best pizza",
-      "price": "55"
+      "price": "55",
+      "category": "1"
     },
     {
       "id": 2,
       "name": "Cheeseburger",
       "description": "Best burger",
-      "price": "70"
+      "price": "70",
+      "category": "1"
     },
     {
       "id": 3,
-      "name": "Steak",
-      "description": "Best steak",
-      "price": "90"
+      "name": "Coke",
+      "description": "Best COKE",
+      "price": "20",
+      "category": "2"
     },
     {
       "id": 4,
-      "name": "Scrambled Egg",
-      "description": "Best egg",
-      "price": "50"
+      "name": "Water",
+      "description": "Best water",
+      "price": "0",
+      "category": "2"
     }
   ]
 }
