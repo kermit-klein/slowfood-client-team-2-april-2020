@@ -7,8 +7,28 @@ describe("User can see menu", () => {
       response: "fixture:menu_list_index.json",
     });
   });
-  it("shows first item", () => {
+
+  // it("shows first item", () => {
+  //   cy.visit("/");
+  //   cy.get("#menu-item-1").within(() => {
+  //     cy.contains("Pizza");
+  //     cy.contains("Best pizza");
+  //     cy.contains("55");
+  //   });
+  // });
+
+  // it("shows second item", () => {
+  //   cy.visit("/");
+  //   cy.get("#menu-item-2").within(() => {
+  //     cy.contains("Cheeseburger");
+  //     cy.contains("Best burger");
+  //     cy.contains("70");
+  //   });
+  // });
+
+  it("User can select main dishes", () => {
     cy.visit("/");
+    cy.get("#main-dish").click();
     cy.get("#menu-item-1").within(() => {
       cy.contains("Pizza");
       cy.contains("Best pizza");
@@ -16,12 +36,13 @@ describe("User can see menu", () => {
     });
   });
 
-  it("shows second item", () => {
+  it("User can select drinks", () => {
     cy.visit("/");
-    cy.get("#menu-item-2").within(() => {
-      cy.contains("Cheeseburger");
-      cy.contains("Best burger");
-      cy.contains("70");
+    cy.get("#drinks").click();
+    cy.get("#menu-item-1").within(() => {
+      cy.contains("Coke");
+      cy.contains("Best COKE");
+      cy.contains("20");
     });
   });
 });
