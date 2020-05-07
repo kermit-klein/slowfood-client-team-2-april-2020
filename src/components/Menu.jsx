@@ -18,30 +18,38 @@ export class Menu extends Component {
     }
   }
 
+  toHtml(list) {
+    let listed = list.map((item) => {
+      return (
+        <div id={"menu-item-" + item.id}>
+          <p>{item.name}</p>
+          <p>{item.description}</p>
+          <p>{item.price}</p>
+        </div>
+      );
+    });
+    return listed;
+  }
+
   render() {
     const menuList = this.state.menuList;
-    let menuMainDish;
-    let menuDrinks;
-    if (menuList.length > 0) {
-      menu = menuList.map((item) => {
-        return (
-          <>
-            <div id={"menu-item-" + item.id}>
-              <p>{item.name}</p>
-              <p>{item.description}</p>
-              <p>{item.price}</p>
-            </div>
-          </>
-        );
-      });
-    }
-
     const panes = [
       {
         menuItem: "Main Dish",
-        render: () => <Tab.Pane>Tab 1 Content</Tab.Pane>,
+        render: () => (
+          <Tab.Pane>
+            {this.toHtml(menuList.filter((item) => item.category === "1"))}
+          </Tab.Pane>
+        ),
       },
-      { menuItem: "Drinks", render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
+      {
+        menuItem: "Drinks",
+        render: () => (
+          <Tab.Pane>
+            {this.toHtml(menuList.filter((item) => item.category === "2"))}
+          </Tab.Pane>
+        ),
+      },
     ];
 
     return (
