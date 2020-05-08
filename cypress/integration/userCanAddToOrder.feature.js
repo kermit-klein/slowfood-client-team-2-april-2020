@@ -3,13 +3,13 @@ describe("User can add a product to their order", () => {
     cy.server();
     cy.route({
       method: "GET",
-      url: "http://localhost:3001/api/v1/menu_items",
+      url: "http://localhost:3000/api/v1/menu_items",
       response: "fixture:menu_list_index.json",
     });
 
     cy.route({
       method: "POST",
-      url: "http://localhost:3001/api/v1/orders",
+      url: "http://localhost:3000/api/v1/orders",
       response: {message: 'A product has been added to your order'}
     });
   });
