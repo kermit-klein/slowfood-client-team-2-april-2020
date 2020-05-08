@@ -10,7 +10,7 @@ describe("User can add a product to their order", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/v1/orders",
-      response: {message: 'A product has been added to your order'}
+      response: { message: "The product has been added to your order" },
     });
   });
 
@@ -18,7 +18,17 @@ describe("User can add a product to their order", () => {
     cy.visit("/");
     cy.get("#menu-item-1").within(() => {
       cy.get("button").contains("Add to order").click();
+      cy.get(".message").should(
+        "contain",
+        "The product has been added to your order"
+      );
     });
-    cy.contains('A product has been added to your order')
+    cy.get("#menu-item-2").within(() => {
+      cy.get("button").contains("Add to order").click();
+      cy.get(".message").should(
+        "contain",
+        "The product has been added to your order"
+      );
+    });
   });
 });
