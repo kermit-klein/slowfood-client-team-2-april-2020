@@ -3,7 +3,7 @@ describe("User can see menu", () => {
     cy.server();
     cy.route({
       method: "GET",
-      url: "http://localhost:3000/api/v1/menu_items",
+      url: "http://localhost:3001/api/v1/menu_items",
       response: "fixture:menu_list_index.json",
     });
   });
