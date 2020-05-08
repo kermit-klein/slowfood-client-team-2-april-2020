@@ -19,16 +19,12 @@ export class Menu extends Component {
     }
   }
 
-   
-    
     async addToOrder(event) {
       let id = event.target.parentElement.dataset.id
       let result = await axios.post('/orders', {id: id});
       this.setState({message: {id: id, message: result.data.message } });
-    
     }
   
-
   toHtml(list) {
     let listed = list.map((item) => {
       return (
