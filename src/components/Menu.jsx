@@ -5,7 +5,8 @@ import { Tab } from "semantic-ui-react";
 export class Menu extends Component {
   state = {
     menuList: [],
-    message: {}
+    message: {},
+    orderId: "",
   };
 
   async componentDidMount() {
@@ -19,12 +20,18 @@ export class Menu extends Component {
     }
   }
 
-     addToOrder = async (event) => {
-      let id = event.target.parentElement.dataset.id
-      let result = await axios.post('/orders', {menu_item: id});
-      this.setState({message: {id: id, message: result.data.message } });
-    }
-  
+  addToOrder = async (event) => {
+    let id = event.target.parentElement.dataset.id;
+    let result = await axios.post("/orders", { menu_item: id });
+    this.setState({
+      message: {
+        id: id,
+        message: result.data.message,
+        orderId: result.data.order_id,
+      },
+    });
+  };
+
   toHtml(list) {
     let listed = list.map((item) => {
       return (
@@ -32,9 +39,7 @@ export class Menu extends Component {
           <p>{item.name}</p>
           <p>{item.description}</p>
           <p>{item.price}</p>
-          <button onClick={this.addToOrder}>
-            Add to order
-          </button>
+          <button onClick={this.addToOrder}>Add to order</button>
           <p className="message">{this.state.message.message}</p>
         </div>
       );
