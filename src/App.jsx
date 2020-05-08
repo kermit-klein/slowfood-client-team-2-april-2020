@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Menu from "./components/Menu";
 import LoginForm from "./components/LoginForm";
 import { authenticate } from "./modules/auth";
+import NavBar from "./components/NavBar"
 
 class App extends Component {
   state = {
     renderLoginForm: false,
     authenticated: false,
     message: "",
+    form: "none"
   };
 
   onLogin = async (e) => {
@@ -26,6 +28,14 @@ class App extends Component {
   onChangeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  onFormChange = (form) => {
+    if (this.state.form == form) {
+      this.setState( {form: "none"} )
+    } else {
+      this.setState({ form })
+    }
+  }
 
   render() {
     const { renderLoginForm, authenticated, message } = this.state;
@@ -62,9 +72,17 @@ class App extends Component {
     return (
       <>
         <div>
-          <Menu />
+          <NavBar
+            onFormChange={ this.onFormChange }
+            authenticated={ this.state.authenticated}
+          />
+          <div style={{"padding-top":"300px"}}></div>
+          <div id="menu" style={{"margin-left":"40px"}}>
+            <Menu />
+          </div>
         </div>
         {renderLogin}
+        {this.state.form}
       </>
     );
   }
