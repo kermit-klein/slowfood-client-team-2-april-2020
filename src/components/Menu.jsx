@@ -22,7 +22,14 @@ export class Menu extends Component {
 
   addToOrder = async (event) => {
     let id = event.target.parentElement.dataset.id;
-    let result = await axios.post("/orders", { menu_item: id });
+    let result;
+    if (this.state.orderId !== "") {
+      result = await axios.put(`/orders/${this.state.orderId}`, {
+        menu_item: id,
+      });
+    } else {
+      result = await axios.post("/orders", { menu_item: id });
+    }
     this.setState({
       message: {
         id: id,
