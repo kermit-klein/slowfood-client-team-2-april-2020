@@ -34,8 +34,8 @@ export class Menu extends Component {
       message: {
         id: id,
         message: result.data.message,
-        orderId: result.data.order_id,
       },
+      orderId: result.data.order_id,
     });
   };
 
@@ -76,9 +76,12 @@ export class Menu extends Component {
     ];
 
     return (
-      <div id="menu">
-        <Tab panes={panes} />
-      </div>
+      <>
+        <div id="menu">
+          <Tab panes={panes} />
+        </div>
+        {this.state.orderId !== "" && <button>View order</button>}
+      </>
     );
   }
 }
