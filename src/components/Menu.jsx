@@ -88,7 +88,10 @@ export class Menu extends Component {
     return (
       <>
         {this.state.showOrder && (
+          <>
           <ul id="order-details">{orderDetailsDisplay}</ul>
+          <p id="total-amount"> To pay: {this.state.orderDetails.order_total}</p>
+          </>
         )}
         <div id="menu">
           <Tab panes={panes} />
@@ -98,6 +101,7 @@ export class Menu extends Component {
             onClick={() => this.setState({ showOrder: !this.state.showOrder })}
           >
             View order
+
           </button>
         )}
       </>
