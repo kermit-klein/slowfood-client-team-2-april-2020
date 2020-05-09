@@ -7,6 +7,7 @@ export class Menu extends Component {
     menuList: [],
     message: {},
     orderId: "",
+    showOrder: false,
   };
 
   async componentDidMount() {
@@ -77,10 +78,20 @@ export class Menu extends Component {
 
     return (
       <>
+        {this.state.showOrder && (
+          <ul id="order-details">
+            <li>Item 1</li>
+            <li>Item 2</li>
+          </ul>
+        )}
         <div id="menu">
           <Tab panes={panes} />
         </div>
-        {this.state.orderId !== "" && <button>View order</button>}
+        {this.state.orderId !== "" && (
+          <button onClick={() => this.setState({ showOrder: true })}>
+            View order
+          </button>
+        )}
       </>
     );
   }
