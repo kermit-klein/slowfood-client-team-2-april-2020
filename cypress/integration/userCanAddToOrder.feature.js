@@ -19,6 +19,7 @@ describe("User can add a product to their order", () => {
       response: "fixture:put_response.json",
     });
   });
+
   describe("user can add multiple products", () => {
     it("user gets confirmation message when adding a product to order", () => {
       cy.visit("/");
@@ -38,6 +39,7 @@ describe("User can add a product to their order", () => {
       });
     });
   });
+  
   describe("user can add multiple products ", () => {
     it("and view its content", () => {
       cy.visit("/");
@@ -51,6 +53,13 @@ describe("User can add a product to their order", () => {
       });
 
       cy.get("button").contains("View order").should("exist");
+      cy.get("button").contains("View order").click();
+      cy.get("#order-details").within(() => {
+      cy.get("li").should("have.length", 1)
+        .first().should('have.text', '1 x Salad')
+      });
+      cy.get("#total-amount").should("contain", "4");
+
       cy.get("#menu-item-2").within(() => {
         cy.get("button").contains("Add to order").click();
         cy.get(".message").should(
@@ -59,10 +68,12 @@ describe("User can add a product to their order", () => {
         );
       });
 
-      cy.get("button").contains("View order").click();
       cy.get("#order-details").within(() => {
-        cy.get("li").should("have.length", 2);
+      cy.get("li").should("have.length", 2)
+        .first().should('have.text', '1 x Salad')
+        .next().should('have.text', '1 x Ice Cream');
       });
+      cy.get("#total-amount").should("contain", "7.75");
       cy.get("button").contains("View order").click();
       cy.get("#order-details").should("not.exist");
     });

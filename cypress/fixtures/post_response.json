@@ -1,14 +1,15 @@
 {
   "message": "The product has been added to your order",
-  "order_details": {
-    "order": {
-      "id": 1,
-      "menu_items": [
-        {
-          "name": "Salad",
-          "price": 4.0
-        }
-      ]
-    }
+  "order": {
+    "id": 1,
+    "menu_items": [
+      {
+        "amount": 1,
+        "name": "Salad",
+        "price": 4.0
+      }
+    ],
+    "order_total": 4.0,
+    "finalized": false
   }
 }
