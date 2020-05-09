@@ -36,7 +36,7 @@ export class Menu extends Component {
         id: id,
         message: result.data.message,
       },
-      orderDetails: result.data.order_details.order,
+      orderDetails: result.data.order
     });
   };
 
@@ -79,7 +79,7 @@ export class Menu extends Component {
 
     if (this.state.orderDetails.hasOwnProperty("menu_items")) {
       orderDetailsDisplay = this.state.orderDetails.menu_items.map((item) => {
-        return <li key={item.name}>{item.name}</li>;
+        return <li key={item.name}>{`${item.amount} x ${item.name}`}</li>;
       });
     } else {
       orderDetailsDisplay = "Nothing to see";
