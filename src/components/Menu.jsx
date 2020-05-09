@@ -101,7 +101,6 @@ export class Menu extends Component {
             onClick={() => this.setState({ showOrder: !this.state.showOrder })}
           >
             View order
-
           </button>
         )}
       </>
