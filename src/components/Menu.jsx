@@ -5,7 +5,9 @@ import { Tab } from "semantic-ui-react";
 export class Menu extends Component {
   state = {
     menuList: [],
-    message: {}
+    message: {},
+    orderDetails: {},
+    showOrder: false,
   };
 
   async componentDidMount() {
@@ -19,12 +21,25 @@ export class Menu extends Component {
     }
   }
 
-     addToOrder = async (event) => {
-      let id = event.target.parentElement.dataset.id
-      let result = await axios.post('/orders', {menu_item: id});
-      this.setState({message: {id: id, message: result.data.message } });
+  addToOrder = async (event) => {
+    let id = event.target.parentElement.dataset.id;
+    let result;
+    if (this.state.orderDetails.hasOwnProperty("id")) {
+      result = await axios.put(`/orders/${this.state.orderDetails.id}`, {
+        menu_item: id,
+      });
+    } else {
+      result = await axios.post("/orders", { menu_item: id });
     }
-  
+    this.setState({
+      message: {
+        id: id,
+        message: result.data.message,
+      },
+      orderDetails: result.data.order_details.order,
+    });
+  };
+
   toHtml(list) {
     let listed = list.map((item) => {
       return (
@@ -32,9 +47,7 @@ export class Menu extends Component {
           <p>{item.name}</p>
           <p>{item.description}</p>
           <p>{item.price}</p>
-          <button onClick={this.addToOrder}>
-            Add to order
-          </button>
+          <button onClick={this.addToOrder}>Add to order</button>
           <p className="message">{this.state.message.message}</p>
         </div>
       );
@@ -44,6 +57,7 @@ export class Menu extends Component {
 
   render() {
     const menuList = this.state.menuList;
+    let orderDetailsDisplay;
     const panes = [
       {
         menuItem: "Main Dish",
@@ -63,10 +77,30 @@ export class Menu extends Component {
       },
     ];
 
+    if (this.state.orderDetails.hasOwnProperty("menu_items")) {
+      orderDetailsDisplay = this.state.orderDetails.menu_items.map((item) => {
+        return <li key={item.name}>{item.name}</li>;
+      });
+    } else {
+      orderDetailsDisplay = "Nothing to see";
+    }
+
     return (
-      <div id="menu">
-        <Tab panes={panes} />
-      </div>
+      <>
+        {this.state.showOrder && (
+          <ul id="order-details">{orderDetailsDisplay}</ul>
+        )}
+        <div id="menu">
+          <Tab panes={panes} />
+        </div>
+        {this.state.orderDetails.hasOwnProperty("menu_items") && (
+          <button
+            onClick={() => this.setState({ showOrder: !this.state.showOrder })}
+          >
+            View order
+          </button>
+        )}
+      </>
     );
   }
 }
