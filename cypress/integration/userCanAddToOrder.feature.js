@@ -10,19 +10,13 @@ describe("User can add a product to their order", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/v1/orders",
-      response: {
-        message: "The product has been added to your order",
-        order_id: 1,
-      },
+      response: "fixture:post_response.json",
     });
 
     cy.route({
       method: "PUT",
       url: "http://localhost:3000/api/v1/orders/1",
-      response: {
-        message: "The product has been added to your order",
-        order_id: 1,
-      },
+      response: "fixture:put_response.json",
     });
   });
   describe("user can add multiple products", () => {
