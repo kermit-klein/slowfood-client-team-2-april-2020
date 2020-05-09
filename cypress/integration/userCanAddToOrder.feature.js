@@ -61,7 +61,9 @@ describe("User can add a product to their order", () => {
 
       cy.get("button").contains("View order").click();
       cy.get("#order-details").within(() => {
-        cy.get("li").should("have.length", 2);
+        cy.get("li").should("have.length", 2)
+        .first().should('have.text', '1 x Salad')
+        .next().should('have.text', '1 x Ice Cream');
       });
       cy.get("button").contains("View order").click();
       cy.get("#order-details").should("not.exist");
