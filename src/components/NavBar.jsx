@@ -63,7 +63,7 @@ class NavBar extends Component {
             <Button
               as={Link}
               size="big"
-              id="Checkout"
+              id="checkout"
               to="/checkout"
             >
               Checkout
