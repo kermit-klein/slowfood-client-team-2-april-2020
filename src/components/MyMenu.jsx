@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Tab } from "semantic-ui-react";
 
-export class Menu extends Component {
+export class MyMenu extends Component {
   state = {
     menuList: [],
     message: {},
@@ -114,7 +114,7 @@ export class Menu extends Component {
             <button onClick={this.finalizeOrder}>Confirm!</button>
           </>
         )}
-        <div id="menu">
+        <div id="menu" style={{"height":"90vh", "padding-top":"300px"}}>
           <Tab panes={panes} />
         </div>
         {this.state.message.id === 0 && (
@@ -132,4 +132,4 @@ export class Menu extends Component {
   }
 }
 
-export default Menu;
+export default MyMenu;

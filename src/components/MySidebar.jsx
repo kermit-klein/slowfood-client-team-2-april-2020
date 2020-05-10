@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Menu, Segment, Sidebar, Form, Label, Header, Divider} from 'semantic-ui-react'
-import MyMenu from "./MyMenu"
 
 class MySidebar extends Component {
   state= {
