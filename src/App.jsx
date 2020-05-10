@@ -14,6 +14,9 @@ class App extends Component {
     message: "",
     loginMessage: "",
     sidebar: false,
+    orderDetails: {},
+    showOrder: false,
+    orderTotal: "",
   };
 
   onLogin = async (e) => {

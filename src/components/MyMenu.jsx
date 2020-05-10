@@ -1,15 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import axios from "axios";
-import { Tab } from "semantic-ui-react";
+import { Tab, Segment, Header, Rail, Sticky, Ref } from "semantic-ui-react";
 
 export class MyMenu extends Component {
   state = {
     menuList: [],
     message: {},
-    orderDetails: {},
-    showOrder: false,
-    orderTotal: "",
+      orderDetails: {},
+      showOrder: false,
+      orderTotal: "",
   };
+
+  contextRef = createRef()
 
   async componentDidMount() {
     try {
@@ -47,11 +49,15 @@ export class MyMenu extends Component {
   toHtml(list) {
     let listed = list.map((item) => {
       return (
-        <div key={item.id} id={"menu-item-" + item.id}>
-          <p>{item.name}</p>
-          <p>{item.description}</p>
-          <p>{item.price}</p>
-          <button onClick={this.addToOrder}>Add to order</button>
+        <div key={item.id} style={{ width:"100%" }} id={"menu-item-" + item.id} style={{ borderBottom: "grey solid 1px" }}>
+          <div style={{ width: "80%", display:"inline-block"}}>
+            <Header>{item.name}</Header>
+            <p>{item.description}</p>
+          </div>
+          <div style={{ width: "20%", verticalAlign:"center" ,display:"inline-block"}}>
+            <h4 style={{ display:"inline", marginTop:"" }}>{item.price}:-</h4>
+            <button onClick={this.addToOrder}>Add to order</button>
+          </div>
           <p className="message">{this.state.message.message}</p>
         </div>
       );
@@ -74,24 +80,21 @@ export class MyMenu extends Component {
   render() {
     const menuList = this.state.menuList;
     let orderDetailsDisplay;
-    const panes = [
-      {
-        menuItem: "Main Dish",
-        render: () => (
-          <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "main_course"))}
-          </Tab.Pane>
-        ),
-      },
-      {
-        menuItem: "Drinks",
-        render: () => (
-          <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "drinks"))}
-          </Tab.Pane>
-        ),
-      },
-    ];
+    let categories = ["Starters","Main Courses","Desserts","Drinks","Extras"]
+    let categoriesSnake = ["starter","main_course","drinks","dessert","extras"]
+    const panes = [];
+    categories.forEach((category, index) => {
+      panes.push(
+        {
+          menuItem: category,
+          render: () => (
+            <Tab.Pane>
+              {this.toHtml(menuList.filter((item) => item.category === categoriesSnake[index] ))}
+            </Tab.Pane>
+          ),
+        }
+      )
+    })
 
     if (this.state.orderDetails.hasOwnProperty("menu_items")) {
       orderDetailsDisplay = this.state.orderDetails.menu_items.map((item) => {
@@ -103,32 +106,37 @@ export class MyMenu extends Component {
 
     return (
       <>
-        
-        <div id="menu" style={{"height":"90vh", paddingTop:"300px"}}>
-          <Tab panes={panes} />
-          {this.state.orderDetails.hasOwnProperty("menu_items") && (
-          <button
-            onClick={() => this.setState({ showOrder: !this.state.showOrder })}
-          >
-            View order
-          </button>
-        )}
-        {this.state.showOrder && (
-          <>
-            <ul id="order-details">{orderDetailsDisplay}</ul>
-            <p id="total-amount">
-              {" "}
-              To pay:{" "}
-              {this.state.orderDetails.order_total || this.state.orderTotal} kr
-            </p>
-            <button onClick={this.finalizeOrder}>Confirm!</button>
-          </>
-        )}
-        </div>
-        {this.state.message.id === 0 && (
-          <h2 className="message">{this.state.message.message}</h2>
-        )}
+        <Segment name="menu-segment" style={{ width: "88vw", marginTop:"300px", marginLeft:"6vw", backgroundColor: "lightblue" }} >
+          <Ref innerRef={this.contextRef}>
+            <>
+          <div id="menu" style={{minHeight:"95vh", width:"100%" }}>
+            <Tab panes={panes} />
+            {this.state.orderDetails.hasOwnProperty("menu_items") && (
+            <button
+              onClick={() => this.setState({ showOrder: !this.state.showOrder })}
+            >
+              View order
+            </button>
+          )}
+          {this.state.showOrder && (
+            <>
+              <ul id="order-details">{orderDetailsDisplay}</ul>
+              <p id="total-amount">
+                {" "}
+                To pay:{" "}
+                {this.state.orderDetails.order_total || this.state.orderTotal} kr
+              </p>
+              <button onClick={this.finalizeOrder}>Confirm!</button>
+            </>
+          )}
 
+          </div>
+          {this.state.message.id === 0 && (
+            <h2 className="message">{this.state.message.message}</h2>
+          )}
+            </>
+          </Ref>
+        </Segment>
       </>
     );
   }
