@@ -4,13 +4,13 @@ describe("User can navigate the page", () => {
   })
 
   it('should start on about page', () => {
-    cy.get('#about-page').contains('About')
+    cy.get('#about-page').contains('Bigheadgigolo')
   })
 
   it('can go to about page', () => {
     cy.get('a#about').click()
     cy.url().should("contain", "/about")
-    cy.get('#about-page').contains('About')
+    cy.get('#about-page').contains('Bigheadgigolo')
   })
 
   it('can go to menu', () => {
