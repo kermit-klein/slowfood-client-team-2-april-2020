@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Menu, Segment, Sidebar, Form, Label, Header, Divider} from 'semantic-ui-react'
-import NavBar from "./NavBar"
+import MyMenu from "./MyMenu"
 
 class MySidebar extends Component {
   state= {
-    visible: this.props.visible
+    visible: this.props.visible,
   }
 
   componentDidUpdate(){
@@ -25,11 +25,9 @@ class MySidebar extends Component {
           direction="right"
           visible={this.state.visible}
           width='wide'
-          styling={{"padding-top": "140px"}}
+          style={{"padding-top": "95px", "overflow":"hidden"}}
         >
-          <div styling={{"height": "440px"}}><br /><br /><br /><br /><br /></div>
           <Menu.Item as={Form}>
-
             <Header inverted>Login</Header>
             <Form id="login-form" onSubmit={this.props.submitFormHandler}>
               <Label>Email</Label>
@@ -51,9 +49,9 @@ class MySidebar extends Component {
             </Form>
           </Menu.Item>
         </Sidebar>
-
-        <Sidebar.Pusher dimmed={this.state.visible} >
-        <div style={{"height":"100vh"}}></div>
+        
+        <Sidebar.Pusher dimmed={this.state.visible} onClick={() => this.setState({visible: false})}>
+            {this.props.children}
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     )

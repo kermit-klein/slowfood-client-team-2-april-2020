@@ -10,7 +10,7 @@ class NavBar extends Component {
           fixed="top"
           inverted
           color="black"
-          stackable
+          style={{"margin-bottom":"95px"}}
         >
           <Header 
             inverted 
@@ -18,7 +18,7 @@ class NavBar extends Component {
           >
             InstaFood
           </Header>
-          <Menu.Menu position="right">
+          <Menu.Menu position="right" stackable>
             <ButtonGroup color="black">
             <Button
               id="about"

@@ -38,22 +38,22 @@ export class Menu extends Component {
         menuItem: "Main Dish",
         render: () => (
           <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "1"))}
+            {this.toHtml(menuList.filter((item) => item.category === "main_course"))}
           </Tab.Pane>
         ),
       },
       {
-        menuItem: "Drinks",
+        menuItem: "Starters",
         render: () => (
           <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "2"))}
+            {this.toHtml(menuList.filter((item) => item.category === "starter"))}
           </Tab.Pane>
         ),
       },
     ];
 
     return (
-      <div id="menu">
+      <div id="menu" style={{"padding-top":"300px", "height":"100vh"}}>
         <Tab panes={panes} />
       </div>
     );

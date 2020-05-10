@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Menu from "./components/Menu";
+import MyMenu from "./components/MyMenu";
 import LoginForm from "./components/LoginForm";
 import { authenticate } from "./modules/auth";
 import NavBar from "./components/NavBar"
@@ -79,14 +79,11 @@ class App extends Component {
           />
           <MySidebar
             visible={ this.state.form !== "none" }
-            style={{ "float":"right"}}
+            children={(
+              <MyMenu />
+            )}
           />
-          <div style={{"padding-top":"300px"}}></div>
-          <div id="menu" style={{"margin-left":"40px"}}>
-            <Menu />
-          </div>
         </div>
-        {this.state.form}
       </>
     );
   }
