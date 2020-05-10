@@ -3,6 +3,7 @@ import Menu from "./components/Menu";
 import LoginForm from "./components/LoginForm";
 import { authenticate } from "./modules/auth";
 import NavBar from "./components/NavBar"
+import MySidebar from "./components/MySidebar";
 
 class App extends Component {
   state = {
@@ -76,12 +77,15 @@ class App extends Component {
             onFormChange={ this.onFormChange }
             authenticated={ this.state.authenticated}
           />
+          <MySidebar
+            visible={ this.state.form !== "none" }
+            style={{ "float":"right"}}
+          />
           <div style={{"padding-top":"300px"}}></div>
           <div id="menu" style={{"margin-left":"40px"}}>
             <Menu />
           </div>
         </div>
-        {renderLogin}
         {this.state.form}
       </>
     );

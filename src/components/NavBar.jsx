@@ -46,20 +46,14 @@ class NavBar extends Component {
               secondary
             >
             <Button
-              style={{ "height": "45px", "width": "90px"}}
+              style={{ "height": "90px", "width": "90px"}}
               id="signup"
               onClick={() => this.props.onFormChange("signup")}
             >
               Sign up
-            </Button>
-            <Divider
-              fitted
-            ></Divider>
-            <Button
-              style={{ "height": "45px", "width": "90px"}}
-              onClick={() => this.props.onFormChange("login")}
-              id="login"
-            >
+              <br />
+              {"or"}
+              <br />
               Login
             </Button>
             </Button.Group>
