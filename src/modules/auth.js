@@ -34,9 +34,27 @@ const register = async (email, password, password_confirmation) => {
     await storeAuthCredentials(response);
     return { authenticated: true };
   } catch (error) {
-    debugger;
     return { authenticated: false, message: error.response.data.errors[0] };
   }
 };
 
-export { authenticate, register };
+const logOut = async () => {
+  let headers = sessionStorage.getItem("credentials");
+  headers = JSON.parse(headers);
+  headers = {
+    ...headers,
+    "Content-type": "application/json",
+    Accept: "application/json",
+  };
+
+  try {
+    await axios.delete("/auth/sign_out", { headers: headers });
+    window.sessionStorage.removeItem("credentials");
+    return { authenticated: false };
+  } catch (error) {
+    debugger;
+    console.log(error);
+  }
+};
+
+export { authenticate, register, logOut };

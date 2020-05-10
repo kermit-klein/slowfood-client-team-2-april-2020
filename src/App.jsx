@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MyMenu from "./components/MyMenu";
-import { authenticate, register } from "./modules/auth";
+import { authenticate, register, logOut } from "./modules/auth";
 import NavBar from "./components/NavBar";
 import MySidebar from "./components/MySidebar";
 import About from "./components/About";
@@ -43,6 +43,16 @@ class App extends Component {
     }
   };
 
+  onLogOut = async (e) => {
+    console.log(e);
+    const response = await logOut();
+    if (!response.authenticated) {
+      this.setState({ authenticated: false, sidebar: true });
+    } else {
+      this.setState({ loginMessage: response.message });
+    }
+  };
+
   onChangeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -58,6 +68,7 @@ class App extends Component {
           <NavBar
             onFormChange={this.onFormChange}
             authenticated={this.state.authenticated}
+            logOutHandler={this.onLogOut}
           />
           <MySidebar
             visible={this.state.sidebar}
