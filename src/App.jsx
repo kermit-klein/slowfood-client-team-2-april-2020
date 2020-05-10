@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import MyMenu from "./components/MyMenu";
-import LoginForm from "./components/LoginForm";
 import { authenticate } from "./modules/auth";
 import NavBar from "./components/NavBar"
 import MySidebar from "./components/MySidebar";
@@ -39,43 +38,12 @@ class App extends Component {
   }
 
   render() {
-    const { renderLoginForm, authenticated, message } = this.state;
-    let renderLogin;
-    switch (true) {
-      case !authenticated:
-        renderLogin = (
-          <>
-            <button
-              id="login"
-              onClick={() =>
-                this.setState({ renderLoginForm: !this.state.renderLoginForm })
-              }
-            >
-              Login
-            </button>
-            <p id="message">{message}</p>
-            <LoginForm
-              submitFormHandler={this.onLogin}
-              sidebarP={this.state.renderLoginForm}
-            />
-          </>
-        );
-        break;
-      case authenticated:
-        renderLogin = (
-          <p id="message">
-            Hi {JSON.parse(sessionStorage.getItem("credentials")).uid}
-          </p>
-        );
-        break;
-    }
-
     return (
       <>
         <div>
           <NavBar
             onFormChange={ this.onFormChange }
-            authenticated={ this.state.authenticated}
+            authenticated={ this.state.authenticated }
           />
           <MySidebar
             visible={ this.state.form !== "none" }
