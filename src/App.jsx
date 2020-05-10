@@ -3,6 +3,9 @@ import MyMenu from "./components/MyMenu";
 import { authenticate } from "./modules/auth";
 import NavBar from "./components/NavBar"
 import MySidebar from "./components/MySidebar";
+import About from "./components/About"
+import Checkout from "./components/Checkout"
+import { Switch, Route, BrowserRouter as Router} from "react-router-dom"
 
 class App extends Component {
   state = {
@@ -38,8 +41,18 @@ class App extends Component {
   }
 
   render() {
+    const MainContent = () => {
+      return (      
+        <Switch>
+          <Route exact path="/" component={About}></Route>
+          <Route exact path="/about" component={About}></Route>
+          <Route exact path="/menu" component={MyMenu}></Route>
+          <Route exact path="/checkout" component={Checkout}></Route>
+        </Switch>
+      )
+    }
     return (
-      <>
+      <Router>
         <div>
           <NavBar
             onFormChange={ this.onFormChange }
@@ -48,11 +61,16 @@ class App extends Component {
           <MySidebar
             visible={ this.state.form !== "none" }
             children={(
-              <MyMenu />
+            <Switch>
+              <Route exact path="/" component={About}></Route>
+              <Route exact path="/about" component={About}></Route>
+              <Route exact path="/menu" component={MyMenu}></Route>
+              <Route exact path="/checkout" component={Checkout}></Route>
+            </Switch>
             )}
           />
         </div>
-      </>
+      </Router>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Menu, ButtonGroup, Divider, Button, Header } from 'semantic-ui-react'
+import { Menu, ButtonGroup, Button, Header } from 'semantic-ui-react'
+import { Link } from "react-router-dom"
 
 class NavBar extends Component {
   render() {
@@ -21,23 +22,26 @@ class NavBar extends Component {
           <Menu.Menu position="right" stackable>
             <ButtonGroup color="black">
             <Button
+              as={Link}
+              to="/about"
               id="about"
-              onClick={() => alert('About')}
               size="big"
             >
               About us
             </Button>
             <Button
+              as={Link}
               id="menu"
-              onClick={() => alert('Menu')}
+              to="/menu"
               size="big"
             >
               Menu
             </Button>
             <Button
+              as={Link}
               size="big"
               id="Checkout"
-              onClick={() => alert('Checkout')}
+              to="/checkout"
             >
               Checkout
             </Button>
