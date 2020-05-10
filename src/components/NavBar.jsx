@@ -4,6 +4,29 @@ import { Link } from "react-router-dom"
 
 class NavBar extends Component {
   render() {
+    const logButton = () => {
+      if ( !this.props.authenticated ) {
+        return (
+          <Button
+            style={{ "height": "90px", "width": "90px"}}
+            id="signup"
+            onClick={() => this.props.onFormChange()}
+          >
+            Sign up
+            <br />
+            or
+            <br />
+            Login
+          </Button>
+        )
+      } else {
+        return (
+          <Button id="logout-btn">Logout {JSON.parse(sessionStorage.getItem("credentials")).uid}</Button>
+        )
+        
+      }
+    }
+
     return (
       <div>
         <Menu
@@ -11,15 +34,15 @@ class NavBar extends Component {
           fixed="top"
           inverted
           color="black"
-          style={{"margin-bottom":"95px"}}
+          style={{marginBottom:"95px"}}
         >
           <Header 
             inverted 
-            style={{ "font-family": "Allura", "font-size":"72px", "padding-top":"15px", "margin-bottom":"-15px"}}
+            style={{ fontFamily: "Allura", fontSize:"72px", paddingTop:"15px", marginBottom:"-15px"}}
           >
             InstaFood
           </Header>
-          <Menu.Menu position="right" stackable>
+          <Menu.Menu position="right">
             <ButtonGroup color="black">
             <Button
               as={Link}
@@ -49,17 +72,7 @@ class NavBar extends Component {
               vertical
               secondary
             >
-            <Button
-              style={{ "height": "90px", "width": "90px"}}
-              id="signup"
-              onClick={() => this.props.onFormChange("signup")}
-            >
-              Sign up
-              <br />
-              {"or"}
-              <br />
-              Login
-            </Button>
+            {logButton()}
             </Button.Group>
             </ButtonGroup>
           </Menu.Menu>

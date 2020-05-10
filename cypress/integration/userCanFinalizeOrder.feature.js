@@ -18,7 +18,7 @@ describe("User can add products and finalize order", () => {
       url: "http://localhost:3000/api/v1/orders/1",
       response: "fixture:put_response.json",
     });
-    cy.visit("/");
+    cy.visit("/menu");
   });
 
   describe("user can add multiple products ", () => {

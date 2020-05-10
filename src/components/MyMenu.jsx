@@ -84,10 +84,10 @@ export class MyMenu extends Component {
         ),
       },
       {
-        menuItem: "Starters",
+        menuItem: "Drinks",
         render: () => (
           <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "starter"))}
+            {this.toHtml(menuList.filter((item) => item.category === "drinks"))}
           </Tab.Pane>
         ),
       },
@@ -103,6 +103,16 @@ export class MyMenu extends Component {
 
     return (
       <>
+        
+        <div id="menu" style={{"height":"90vh", paddingTop:"300px"}}>
+          <Tab panes={panes} />
+          {this.state.orderDetails.hasOwnProperty("menu_items") && (
+          <button
+            onClick={() => this.setState({ showOrder: !this.state.showOrder })}
+          >
+            View order
+          </button>
+        )}
         {this.state.showOrder && (
           <>
             <ul id="order-details">{orderDetailsDisplay}</ul>
@@ -114,19 +124,11 @@ export class MyMenu extends Component {
             <button onClick={this.finalizeOrder}>Confirm!</button>
           </>
         )}
-        <div id="menu" style={{"height":"90vh", "padding-top":"300px"}}>
-          <Tab panes={panes} />
         </div>
         {this.state.message.id === 0 && (
           <h2 className="message">{this.state.message.message}</h2>
         )}
-        {this.state.orderDetails.hasOwnProperty("menu_items") && (
-          <button
-            onClick={() => this.setState({ showOrder: !this.state.showOrder })}
-          >
-            View order
-          </button>
-        )}
+
       </>
     );
   }

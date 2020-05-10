@@ -23,7 +23,7 @@ class LoginForm extends Component {
           inverted
           vertical
           direction="right"
-          visible={this.props.sidebarP}
+          visible={this.props.sidebar}
           width="wide"
         >
           <Menu.Item as="a">

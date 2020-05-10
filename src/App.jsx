@@ -12,7 +12,8 @@ class App extends Component {
     renderLoginForm: false,
     authenticated: false,
     message: "",
-    form: "none"
+    loginMessage: "",
+    sidebar: false
   };
 
   onLogin = async (e) => {
@@ -22,9 +23,9 @@ class App extends Component {
       e.target.password.value
     );
     if (response.authenticated) {
-      this.setState({ authenticated: true });
+      this.setState({ authenticated: true, sidebar: false });
     } else {
-      this.setState({ message: response.message, renderLoginForm: false });
+      this.setState({ loginMessage: response.message });
     }
   };
 
@@ -32,25 +33,11 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onFormChange = (form) => {
-    if (this.state.form == form) {
-      this.setState( {form: "none"} )
-    } else {
-      this.setState({ form })
-    }
+  onFormChange = () => {
+      this.setState( {sidebar: !this.state.sidebar} )
   }
 
   render() {
-    const MainContent = () => {
-      return (      
-        <Switch>
-          <Route exact path="/" component={About}></Route>
-          <Route exact path="/about" component={About}></Route>
-          <Route exact path="/menu" component={MyMenu}></Route>
-          <Route exact path="/checkout" component={Checkout}></Route>
-        </Switch>
-      )
-    }
     return (
       <Router>
         <div>
@@ -59,7 +46,9 @@ class App extends Component {
             authenticated={ this.state.authenticated }
           />
           <MySidebar
-            visible={ this.state.form !== "none" }
+            visible={ this.state.sidebar }
+            submitFormHandler={this.onLogin }
+            message={ this.state.loginMessage }
             children={(
             <Switch>
               <Route exact path="/" component={About}></Route>

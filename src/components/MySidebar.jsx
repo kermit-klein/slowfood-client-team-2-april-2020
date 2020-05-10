@@ -24,9 +24,10 @@ class MySidebar extends Component {
           direction="right"
           visible={this.state.visible}
           width='wide'
-          style={{"padding-top": "95px", "overflow":"hidden"}}
+          style={{ paddingTop: "95px", "overflow":"hidden"}}
         >
-          <Menu.Item as={Form}>
+          <Header inverted id="login-message">{ this.props.message }</Header>
+          <Menu.Item>
             <Header inverted>Login</Header>
             <Form id="login-form" onSubmit={this.props.submitFormHandler}>
               <Label>Email</Label>
@@ -37,9 +38,9 @@ class MySidebar extends Component {
             </Form>
           </Menu.Item>
           <Divider horizontal inverted>or</Divider>
-          <Menu.Item as={Form}>
+          <Menu.Item>
           <Header inverted>Register</Header>
-            <Form id="login-form" onSubmit={this.props.submitFormHandler}>
+            <Form id="register-form" onSubmit={this.props.submitFormHandler}>
               <Label>Email</Label>
               <input name="email" type="email" id="email"></input>
               <Label>Password</Label>

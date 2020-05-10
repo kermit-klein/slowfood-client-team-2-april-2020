@@ -5,28 +5,35 @@
       "name": "Pizza",
       "description": "Best pizza",
       "price": "55",
-      "category": "1"
+      "category": "main_course"
     },
     {
       "id": 2,
       "name": "Cheeseburger",
       "description": "Best burger",
       "price": "70",
-      "category": "1"
+      "category": "main_course"
     },
     {
       "id": 3,
       "name": "Coke",
       "description": "Best COKE",
       "price": "20",
-      "category": "2"
+      "category": "drinks"
     },
     {
       "id": 4,
       "name": "Water",
       "description": "Best water",
       "price": "0",
-      "category": "2"
+      "category": "drinks"
+    },
+    {
+      "id": 5,
+      "name": "Waffle",
+      "description": "Best waffle",
+      "price": "33",
+      "category": "starter"
     }
   ]
 }

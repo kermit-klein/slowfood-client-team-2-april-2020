@@ -13,13 +13,13 @@ describe("User can log in", () => {
         uid: "user@mail.com",
       },
     });
-    cy.get("#login").click();
+    cy.get("#signup").click();
     cy.get("#login-form").within(() => {
-      cy.get("#login-email").type("user@mail.com");
-      cy.get("#login-password").type("password");
-      cy.get("#login-submit").contains("Submit").click();
+      cy.get("#email").type("user@mail.com");
+      cy.get("#password").type("password");
+      cy.get("#submit").contains("Submit").click();
     });
-    cy.get("#message").should("contain", "Hi user@mail.com");
+    cy.get("#logout-btn").should("contain", "Logout user@mail.com");
   });
 
   it("with invalid credentials", () => {
@@ -32,13 +32,13 @@ describe("User can log in", () => {
         success: false,
       },
     });
-    cy.get("#login").click();
+    cy.get("#signup").click();
     cy.get("#login-form").within(() => {
-      cy.get("#login-email").type("user@mail.com");
-      cy.get("#login-password").type("wrongpassword");
-      cy.get("#login-submit").contains("Submit").click();
+      cy.get("#email").type("user@mail.com");
+      cy.get("#password").type("wrongpassword");
+      cy.get("#submit").contains("Submit").click();
     });
-    cy.get("#message").should(
+    cy.get("#login-message").should(
       "contain",
       "Invalid login credentials. Please try again."
     );
