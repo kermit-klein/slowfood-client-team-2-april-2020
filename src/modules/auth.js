@@ -34,6 +34,7 @@ const register = async (email, password, password_confirmation) => {
     await storeAuthCredentials(response);
     return { authenticated: true };
   } catch (error) {
+    debugger;
     return { authenticated: false, message: error.response.data.errors[0] };
   }
 };

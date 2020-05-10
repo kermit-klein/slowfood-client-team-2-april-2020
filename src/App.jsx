@@ -34,10 +34,10 @@ class App extends Component {
     const response = await register(
       e.target.email.value,
       e.target.password.value,
-      e.target.password_confirmation_value
+      e.target.password_confirmation.value
     );
     if (response.authenticated) {
-      this.setState({ authenticated: true, siderbar: false });
+      this.setState({ authenticated: true, sidebar: false });
     } else {
       this.setState({ loginMessage: response.message });
     }

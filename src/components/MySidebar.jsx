@@ -59,9 +59,9 @@ class MySidebar extends Component {
               <input name="password" type="password" id="password"></input>
               <Label>Password Confirmation</Label>
               <input
-                name="password-confirmation"
+                name="password_confirmation"
                 type="password"
-                id="password_confirmation"
+                id="password-confirmation"
               ></input>
               <button id="submit">Submit</button>
             </Form>
