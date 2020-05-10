@@ -22,7 +22,7 @@ describe("User can add a product to their order", () => {
 
   describe("user can add multiple products", () => {
     it("user gets confirmation message when adding a product to order", () => {
-      cy.visit("/");
+      cy.visit("/menu");
       cy.get("#menu-item-1").within(() => {
         cy.get("button").contains("Add to order").click();
         cy.get(".message").should(
@@ -42,7 +42,7 @@ describe("User can add a product to their order", () => {
 
   describe("user can add multiple products ", () => {
     it("and view order details", () => {
-      cy.visit("/");
+      cy.visit("/menu");
       cy.get("button").contains("View order").should("not.exist");
       cy.get("#menu-item-1").within(() => {
         cy.get("button").contains("Add to order").click();

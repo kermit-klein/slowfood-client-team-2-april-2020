@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Tab } from "semantic-ui-react";
 
-export class Menu extends Component {
+export class MyMenu extends Component {
   state = {
     menuList: [],
     message: {},
@@ -79,7 +79,7 @@ export class Menu extends Component {
         menuItem: "Main Dish",
         render: () => (
           <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "1"))}
+            {this.toHtml(menuList.filter((item) => item.category === "main_course"))}
           </Tab.Pane>
         ),
       },
@@ -87,7 +87,7 @@ export class Menu extends Component {
         menuItem: "Drinks",
         render: () => (
           <Tab.Pane>
-            {this.toHtml(menuList.filter((item) => item.category === "2"))}
+            {this.toHtml(menuList.filter((item) => item.category === "drinks"))}
           </Tab.Pane>
         ),
       },
@@ -103,6 +103,16 @@ export class Menu extends Component {
 
     return (
       <>
+        
+        <div id="menu" style={{"height":"90vh", paddingTop:"300px"}}>
+          <Tab panes={panes} />
+          {this.state.orderDetails.hasOwnProperty("menu_items") && (
+          <button
+            onClick={() => this.setState({ showOrder: !this.state.showOrder })}
+          >
+            View order
+          </button>
+        )}
         {this.state.showOrder && (
           <>
             <ul id="order-details">{orderDetailsDisplay}</ul>
@@ -114,22 +124,14 @@ export class Menu extends Component {
             <button onClick={this.finalizeOrder}>Confirm!</button>
           </>
         )}
-        <div id="menu">
-          <Tab panes={panes} />
         </div>
         {this.state.message.id === 0 && (
           <h2 className="message">{this.state.message.message}</h2>
         )}
-        {this.state.orderDetails.hasOwnProperty("menu_items") && (
-          <button
-            onClick={() => this.setState({ showOrder: !this.state.showOrder })}
-          >
-            View order
-          </button>
-        )}
+
       </>
     );
   }
 }
 
-export default Menu;
+export default MyMenu;

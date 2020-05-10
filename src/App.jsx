@@ -1,13 +1,19 @@
 import React, { Component } from "react";
-import Menu from "./components/Menu";
-import LoginForm from "./components/LoginForm";
+import MyMenu from "./components/MyMenu";
 import { authenticate } from "./modules/auth";
+import NavBar from "./components/NavBar"
+import MySidebar from "./components/MySidebar";
+import About from "./components/About"
+import Checkout from "./components/Checkout"
+import { Switch, Route, BrowserRouter as Router} from "react-router-dom"
 
 class App extends Component {
   state = {
     renderLoginForm: false,
     authenticated: false,
     message: "",
+    loginMessage: "",
+    sidebar: false
   };
 
   onLogin = async (e) => {
@@ -17,9 +23,9 @@ class App extends Component {
       e.target.password.value
     );
     if (response.authenticated) {
-      this.setState({ authenticated: true });
+      this.setState({ authenticated: true, sidebar: false });
     } else {
-      this.setState({ message: response.message, renderLoginForm: false });
+      this.setState({ loginMessage: response.message });
     }
   };
 
@@ -27,45 +33,33 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  render() {
-    const { renderLoginForm, authenticated, message } = this.state;
-    let renderLogin;
-    switch (true) {
-      case !authenticated:
-        renderLogin = (
-          <>
-            <button
-              id="login"
-              onClick={() =>
-                this.setState({ renderLoginForm: !this.state.renderLoginForm })
-              }
-            >
-              Login
-            </button>
-            <p id="message">{message}</p>
-            <LoginForm
-              submitFormHandler={this.onLogin}
-              sidebarP={this.state.renderLoginForm}
-            />
-          </>
-        );
-        break;
-      case authenticated:
-        renderLogin = (
-          <p id="message">
-            Hi {JSON.parse(sessionStorage.getItem("credentials")).uid}
-          </p>
-        );
-        break;
-    }
+  onFormChange = () => {
+      this.setState( {sidebar: !this.state.sidebar} )
+  }
 
+  render() {
     return (
-      <>
+      <Router>
         <div>
-          <Menu />
+          <NavBar
+            onFormChange={ this.onFormChange }
+            authenticated={ this.state.authenticated }
+          />
+          <MySidebar
+            visible={ this.state.sidebar }
+            submitFormHandler={this.onLogin }
+            message={ this.state.loginMessage }
+            children={(
+            <Switch>
+              <Route exact path="/" component={About}></Route>
+              <Route exact path="/about" component={About}></Route>
+              <Route exact path="/menu" component={MyMenu}></Route>
+              <Route exact path="/checkout" component={Checkout}></Route>
+            </Switch>
+            )}
+          />
         </div>
-        {renderLogin}
-      </>
+      </Router>
     );
   }
 }
