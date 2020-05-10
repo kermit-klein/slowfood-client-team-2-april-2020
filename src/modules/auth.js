@@ -24,4 +24,18 @@ const storeAuthCredentials = ({ headers }) => {
   sessionStorage.setItem("credentials", JSON.stringify(credentials));
 };
 
-export { authenticate };
+const register = async (email, password, password_confirmation) => {
+  try {
+    const response = await axios.post("/auth", {
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    });
+    await storeAuthCredentials(response);
+    return { authenticated: true };
+  } catch (error) {
+    return { authenticated: false, message: error.response.data.errors[0] };
+  }
+};
+
+export { authenticate, register };
