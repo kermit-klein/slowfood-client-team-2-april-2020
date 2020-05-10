@@ -82,5 +82,25 @@ describe("User can add a product to their order", () => {
       cy.get("button").contains("View order").click();
       cy.get("#order-details").should("not.exist");
     });
+
+    it("user can finalize the order", () => {
+      cy.get("#menu-item-1").within(() => {
+        cy.get("button").contains("Add to order").click();
+      });
+      cy.get("#menu-item-2").within(() => {
+        cy.get("button").contains("Add to order").click();
+      });
+      cy.get("button").contains("View order").click();
+      cy.route({
+        method: "PUT",
+        url: "http://localhost:3000/api/v1/orders/1",
+        response: { message: "Your order will be ready in 30 minutes!" },
+      });
+      cy.get("button").contains("Confirm!").click();
+      cy.get(".message").should(
+        "contain",
+        "Your order will be ready in 30 minutes!"
+      );
+    });
   });
 });
