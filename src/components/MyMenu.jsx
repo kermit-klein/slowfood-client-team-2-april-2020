@@ -1,14 +1,7 @@
 import React, { Component, createRef } from "react";
 import axios from "axios";
-import {
-  Tab,
-  Segment,
-  Header,
-  Rail,
-  Sticky,
-  Ref,
-  Button,
-} from "semantic-ui-react";
+import { Tab, Segment, Header, Image, Ref, Button } from "semantic-ui-react";
+import yemek from "../images/yemek.png";
 
 export class MyMenu extends Component {
   state = {
@@ -144,7 +137,12 @@ export class MyMenu extends Component {
 
     if (this.state.orderDetails.hasOwnProperty("menu_items")) {
       orderDetailsDisplay = this.state.orderDetails.menu_items.map((item) => {
-        return <li key={item.name}>{`${item.amount} x ${item.name}`}</li>;
+        return (
+          <p
+            key={item.name}
+            style={{ fontSize: "18px" }}
+          >{`${item.amount} x ${item.name}`}</p>
+        );
       });
     } else {
       orderDetailsDisplay = "Nothing to see";
@@ -152,25 +150,34 @@ export class MyMenu extends Component {
 
     return (
       <>
+        <Image src={yemek} style={{ paddingTop: "98px" }} centered />
         <Segment
           name="menu-segment"
           style={{
             width: "88vw",
-            marginTop: "300px",
+            marginTop: "50px",
             marginLeft: "6vw",
             backgroundColor: "lightblue",
           }}
         >
           {this.state.showOrder && (
             <>
-              <ul id="order-details">{orderDetailsDisplay}</ul>
-              <p id="total-amount">
-                {" "}
-                To pay:{" "}
-                {this.state.orderDetails.order_total ||
-                  this.state.orderTotal}{" "}
-                kr
-              </p>
+              <ul id="order-details" style={{ textAlign: "center" }}>
+                {orderDetailsDisplay}
+              </ul>
+
+              <strong>
+                <p
+                  id="total-amount"
+                  style={{ fontSize: "22px", textAlign: "center" }}
+                >
+                  {" "}
+                  To pay:{" "}
+                  {this.state.orderDetails.order_total ||
+                    this.state.orderTotal}{" "}
+                  kr
+                </p>
+              </strong>
               <Button color="green" onClick={this.finalizeOrder}>
                 Confirm!
               </Button>
