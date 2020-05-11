@@ -26,18 +26,18 @@ describe("User can add a product to their order", () => {
       cy.get("a").contains("Main Course").click();
       cy.get("#menu-item-1").within(() => {
         cy.get("button").contains("Add to order").click();
-        cy.get(".message").should(
-          "contain",
-          "The product has been added to your order"
-        );
       });
+      cy.get("p.message").should(
+        "contain",
+        "The product has been added to your order"
+      );
       cy.get("#menu-item-2").within(() => {
         cy.get("button").contains("Add to order").click();
-        cy.get(".message").should(
-          "contain",
-          "The product has been added to your order"
-        );
       });
+      cy.get("p.message").should(
+        "contain",
+        "The product has been added to your order"
+      );
     });
   });
 
@@ -47,11 +47,11 @@ describe("User can add a product to their order", () => {
       cy.get("button").contains("View order").should("not.exist");
       cy.get("#menu-item-5").within(() => {
         cy.get("button").contains("Add to order").click();
-        cy.get(".message").should(
-          "contain",
-          "The product has been added to your order"
-        );
       });
+      cy.get("p.message").should(
+        "contain",
+        "The product has been added to your order"
+      );
 
       cy.get("button").contains("View order").should("exist");
       cy.get("button").contains("View order").click();
@@ -66,11 +66,11 @@ describe("User can add a product to their order", () => {
       cy.get("a").contains("Main Course").click();
       cy.get("#menu-item-2").within(() => {
         cy.get("button").contains("Add to order").click();
-        cy.get(".message").should(
-          "contain",
-          "The product has been added to your order"
-        );
       });
+      cy.get("p.message").should(
+        "contain",
+        "The product has been added to your order"
+      );
 
       cy.get("#order-details").within(() => {
         cy.get("li")

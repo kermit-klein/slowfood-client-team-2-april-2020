@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   Menu,
-  Segment,
+  Button,
   Sidebar,
   Form,
   Label,
@@ -40,11 +40,20 @@ class MySidebar extends Component {
           <Menu.Item>
             <Header inverted>Login</Header>
             <Form id="login-form" onSubmit={this.props.submitFormHandler}>
-              <Label>Email</Label>
+              <Label style={{ marginBottom: "5px" }}>Email</Label>
               <input name="email" type="email" id="email"></input>
-              <Label>Password</Label>
+              <Label style={{ marginBottom: "5px", marginTop: "5px" }}>
+                Password
+              </Label>
               <input name="password" type="password" id="password"></input>
-              <button id="submit">Submit</button>
+              <Button
+                style={{ marginTop: "5px" }}
+                inverted
+                color="teal"
+                id="submit"
+              >
+                Submit
+              </Button>
             </Form>
           </Menu.Item>
           <Divider horizontal inverted>
@@ -53,17 +62,28 @@ class MySidebar extends Component {
           <Menu.Item>
             <Header inverted>Register</Header>
             <Form id="register-form" onSubmit={this.props.registerFormHandler}>
-              <Label>Email</Label>
+              <Label style={{ marginBottom: "5px" }}>Email</Label>
               <input name="email" type="email" id="email"></input>
-              <Label>Password</Label>
+              <Label style={{ marginBottom: "5px", marginTop: "5px" }}>
+                Password
+              </Label>
               <input name="password" type="password" id="password"></input>
-              <Label>Password Confirmation</Label>
+              <Label style={{ marginBottom: "5px", marginTop: "5px" }}>
+                Password Confirmation
+              </Label>
               <input
                 name="password_confirmation"
                 type="password"
                 id="password-confirmation"
               ></input>
-              <button id="submit">Submit</button>
+              <Button
+                style={{ marginTop: "5px" }}
+                inverted
+                color="teal"
+                id="submit"
+              >
+                Submit
+              </Button>
             </Form>
           </Menu.Item>
         </Sidebar>

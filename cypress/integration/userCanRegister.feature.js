@@ -31,7 +31,7 @@ describe("user can register", () => {
       response: "fixture:register.json",
       status: "401",
       response: {
-        errors: ["Invalid entries, Please try again"],
+        errors: { full_messages: ["Invalid entries, Please try again"] },
         success: false,
       },
     });
