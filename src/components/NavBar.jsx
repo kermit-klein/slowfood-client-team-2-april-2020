@@ -50,13 +50,43 @@ class NavBar extends Component {
           </Header>
           <Menu.Menu position="right">
             <ButtonGroup color="black">
-              <Button as={Link} to="/about" id="about" size="big">
+              <Button
+                style={{
+                  textAlign: "center",
+                  height: "auto",
+                  padding: "40px 15px",
+                }}
+                as={Link}
+                to="/about"
+                id="about"
+                size="big"
+              >
                 About us
               </Button>
-              <Button as={Link} id="menu" to="/menu" size="big">
+              <Button
+                style={{
+                  textAlign: "center",
+                  height: "auto",
+                  padding: "40px 15px",
+                }}
+                as={Link}
+                id="menu"
+                to="/menu"
+                size="big"
+              >
                 Menu
               </Button>
-              <Button as={Link} size="big" id="checkout" to="/checkout">
+              <Button
+                style={{
+                  textAlign: "center",
+                  height: "auto",
+                  padding: "40px 15px",
+                }}
+                as={Link}
+                size="big"
+                id="checkout"
+                to="/checkout"
+              >
                 Checkout
               </Button>
               <Button.Group vertical secondary>

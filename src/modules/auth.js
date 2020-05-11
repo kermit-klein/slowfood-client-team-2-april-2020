@@ -34,7 +34,10 @@ const register = async (email, password, password_confirmation) => {
     await storeAuthCredentials(response);
     return { authenticated: true };
   } catch (error) {
-    return { authenticated: false, message: error.response.data.errors[0] };
+    return {
+      authenticated: false,
+      message: error.response.data.errors.full_messages[0],
+    };
   }
 };
 
@@ -52,7 +55,6 @@ const logOut = async () => {
     window.sessionStorage.removeItem("credentials");
     return { authenticated: false };
   } catch (error) {
-    debugger;
     console.log(error);
   }
 };
