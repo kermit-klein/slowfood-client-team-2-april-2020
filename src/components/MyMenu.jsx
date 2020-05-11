@@ -25,7 +25,7 @@ export class MyMenu extends Component {
   }
 
   addToOrder = async (event) => {
-    let id = event.target.parentElement.dataset.id;
+    let id = event.target.dataset.id;
     let result;
     if (
       this.state.orderDetails.hasOwnProperty("id") &&
@@ -56,7 +56,7 @@ export class MyMenu extends Component {
           </div>
           <div style={{ width: "20%", verticalAlign:"center" ,display:"inline-block"}}>
             <h4 style={{ display:"inline", marginTop:"" }}>{item.price}:-</h4>
-            <button onClick={this.addToOrder}>Add to order</button>
+            <button data-id={item.id} onClick={this.addToOrder}>Add to order</button>
           </div>
           <p className="message">{this.state.message.message}</p>
         </div>
@@ -81,7 +81,7 @@ export class MyMenu extends Component {
     const menuList = this.state.menuList;
     let orderDetailsDisplay;
     let categories = ["Starters","Main Courses","Desserts","Drinks","Extras"]
-    let categoriesSnake = ["starter","main_course","drinks","dessert","extras"]
+    let categoriesSnake = ["starter","main_course","desserts","drinks","extras"]
     const panes = [];
     categories.forEach((category, index) => {
       panes.push(
@@ -117,8 +117,8 @@ export class MyMenu extends Component {
             >
               View order
             </button>
-          )}
-          {this.state.showOrder && (
+            )}
+            {this.state.showOrder && (
             <>
               <ul id="order-details">{orderDetailsDisplay}</ul>
               <p id="total-amount">

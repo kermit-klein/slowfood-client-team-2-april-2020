@@ -23,6 +23,7 @@ describe("User can add products and finalize order", () => {
 
   describe("user can add multiple products ", () => {
     it("user can finalize the order", () => {
+      cy.get("a").contains("Main Course").click();
       cy.get("#menu-item-1").within(() => {
         cy.get("button").contains("Add to order").click();
       });
