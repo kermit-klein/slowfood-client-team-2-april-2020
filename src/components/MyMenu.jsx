@@ -138,10 +138,10 @@ export class MyMenu extends Component {
     if (this.state.orderDetails.hasOwnProperty("menu_items")) {
       orderDetailsDisplay = this.state.orderDetails.menu_items.map((item) => {
         return (
-          <p
+          <li
             key={item.name}
             style={{ fontSize: "18px" }}
-          >{`${item.amount} x ${item.name}`}</p>
+          >{`${item.amount} x ${item.name}`}</li>
         );
       });
     } else {
@@ -162,15 +162,10 @@ export class MyMenu extends Component {
         >
           {this.state.showOrder && (
             <>
-              <ul id="order-details" style={{ textAlign: "center" }}>
-                {orderDetailsDisplay}
-              </ul>
+              <ul id="order-details">{orderDetailsDisplay}</ul>
 
               <strong>
-                <p
-                  id="total-amount"
-                  style={{ fontSize: "22px", textAlign: "center" }}
-                >
+                <p id="total-amount" style={{ fontSize: "22px" }}>
                   {" "}
                   To pay:{" "}
                   {this.state.orderDetails.order_total ||
