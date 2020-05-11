@@ -10,7 +10,7 @@ describe("User can see menu", () => {
 
   it("User can select main dishes", () => {
     cy.visit("/menu");
-    cy.get("a").contains("Main Dish").click();
+    cy.get("a").contains("Main Courses").click();
     cy.get("#menu-item-1").within(() => {
       cy.contains("Pizza");
       cy.contains("Best pizza");

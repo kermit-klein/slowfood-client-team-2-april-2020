@@ -23,6 +23,7 @@ describe("User can add a product to their order", () => {
   describe("user can add multiple products", () => {
     it("user gets confirmation message when adding a product to order", () => {
       cy.visit("/menu");
+      cy.get("a").contains("Main Course").click();
       cy.get("#menu-item-1").within(() => {
         cy.get("button").contains("Add to order").click();
         cy.get(".message").should(
@@ -44,7 +45,7 @@ describe("User can add a product to their order", () => {
     it("and view order details", () => {
       cy.visit("/menu");
       cy.get("button").contains("View order").should("not.exist");
-      cy.get("#menu-item-1").within(() => {
+      cy.get("#menu-item-5").within(() => {
         cy.get("button").contains("Add to order").click();
         cy.get(".message").should(
           "contain",
@@ -62,6 +63,7 @@ describe("User can add a product to their order", () => {
       });
       cy.get("#total-amount").should("contain", "4");
 
+      cy.get("a").contains("Main Course").click();
       cy.get("#menu-item-2").within(() => {
         cy.get("button").contains("Add to order").click();
         cy.get(".message").should(
