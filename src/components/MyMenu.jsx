@@ -33,11 +33,17 @@ export class MyMenu extends Component {
       this.state.orderDetails.finalized === false
     ) {
       result = await axios.put(`/orders/${this.state.orderDetails.id}`, {
-        menu_item: id, // user: JSON.parse(sessionStorage.getItem("credentials")).uid || {},
+        menu_item: id,
+        user: JSON.parse(sessionStorage.getItem("credentials"))
+          ? JSON.parse(sessionStorage.getItem("credentials")).uid
+          : null,
       });
     } else {
       result = await axios.post("/orders", {
-        menu_item: id, // user: JSON.parse(sessionStorage.getItem("credentials")).uid || {},
+        menu_item: id,
+        user: JSON.parse(sessionStorage.getItem("credentials"))
+          ? JSON.parse(sessionStorage.getItem("credentials")).uid
+          : null,
       });
     }
     this.setState({
@@ -94,7 +100,6 @@ export class MyMenu extends Component {
     let result = await axios.put(`orders/${this.state.orderDetails.id}`, {
       activity: "finalize",
     });
-    debugger;
     this.setState({
       message: { id: 0, message: result.data.message },
       orderTotal: orderTotal,
